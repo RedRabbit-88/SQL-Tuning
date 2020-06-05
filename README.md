@@ -37,5 +37,20 @@
 ||NL_SJ|NL 세미조인으로 유도
 ||MERGE_SJ|소트 머지 세미조인으로 유도
 ||HASH_SJ|해시 세미조인으로 유도
-서브쿼리 팩토링|MATERIALIZE|WITH 문으로 정의한 집합을 물리적으로 생성하도록 유도<br>ex) WITH /*+ MATERIALIZE */ T AS (SELECT)
-||LINE|WITH 문으로 정의한 집합을 물리적으로 생성하지 않고 INLINE 처리하도록 유도<br>ex) WITH /*+ INLINE */ T AS (SELECT)
+서브쿼리<br>팩토링|MATERIALIZE|WITH 문으로 정의한 집합을 물리적으로 생성하도록 유도<br>`ex) WITH /*+ MATERIALIZE */ T AS (SELECT)`
+||LINE|WITH 문으로 정의한 집합을 물리적으로 생성하지 않고 INLINE 처리하도록 유도<br>`ex) WITH /*+ INLINE */ T AS (SELECT)`
+쿼리 변환|MERGE|뷰 머징 유도
+||NO_MERGE|뷰 머징 방지
+||UNNEST|서브쿼리 Unnesting 유도
+||NO_UNNEST|서브쿼리 Unnesting 방지
+||PUSH_PRED|조인조건 Pushdown 유도
+||NO_PUSH_PRED|조인조건 Pushdown 방지
+||USE_CONCAT|OR 또는 IN-LIST 조건을 OR-Expansion으로 유도
+||NO_EXPAND|OR 또는 IN-LIST 조건을 OR-Expansion으로 방지
+병렬 처리|PARALLEL|테이블 스캔 또는 DML을 병렬방식으로 처리하도록 유도<br>`ex) PARALLEL(T1 2) PARALLEL(T2 2)`
+||PARALLEL_INDEX|인덱스 스캔을 병렬방식으로 처리하도록 유도
+||PQ_DISTRIBUTE|병렬 수행 시 데이터 분배 방식 결정<br>`ex) PQ_DISTRIBUTE(T1 HASH HASH)`
+기타|APPEND|Direct-Path Insert로 유도
+||DRIVING_SITE|DB Link Remove 쿼리에 대한 최적화 및 실행 주체 지정(Local 또는 Remote)
+||PUSH_SUBQ|서브쿼리를 가급적 빨리 필터링하도록 유도
+||NO_PUSH_SUBQ|서브쿼리를 가급적 늦게 필터링하도록 유도
