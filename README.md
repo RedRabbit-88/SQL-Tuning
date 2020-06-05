@@ -29,3 +29,13 @@
 ||INDEX_FFS|Index Fast Full Scan으로 유도
 ||INDEX_SS|Index Skip Skan으로 유도
 조인순서|ORDERED|FROM절에 나온 순서대로 조인
+||LEADING|LEADING 힌트 괄호에 기술한 순서대로 조인<br>ex) LEADING(T1 T2)
+||SWAP_JOIN_INPUTS|해시 조인 시, BUILD INPUT을 명시적으로 선택<br>ex) SWAP_JOING_INPUTS(T1)
+조인방식|USE_NL|NL 조인으로 유도
+||USE_MERGE|소트 머지 조인으로 유도
+||USE_HASH|해시 조인으로 유도
+||NL_SJ|NL 세미조인으로 유도
+||MERGE_SJ|소트 머지 세미조인으로 유도
+||HASH_SJ|해시 세미조인으로 유도
+서브쿼리 팩토링|MATERIALIZE|WITH 문으로 정의한 집합을 물리적으로 생성하도록 유도<br>ex) WITH /*+ MATERIALIZE */ T AS (SELECT)
+||LINE|WITH 문으로 정의한 집합을 물리적으로 생성하지 않고 INLINE 처리하도록 유도<br>ex) WITH /*+ INLINE */ T AS (SELECT)
